@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import TrialCta from '../components/TrialCta.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../data/site';
+const all = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+const stages = all.filter((c) => c.data.kind !== 'ai-module');
+const mods = all.filter((c) => c.data.kind === 'ai-module');
+const colour: Record<string, string> = {
+  beginner: 'var(--orange)', intermediate: 'var(--blue)', advanced: 'var(--violet)', 'ai-builders': 'var(--green)',
+};
+---
+<Base
+  title="Coding and AI Curriculum for Ages 6-15 | Bright School"
+  description="The full Bright School path from age 6 to 15: Blockly for beginners, game and app design, JavaScript and Python, then AI. See what each stage covers."
+>
+  <section class="wrap page-head">
+    <p class="tag">Ages 6 to 15</p>
+    <h1>The curriculum</h1>
+    <p class="lead">One path from a child's first blocks to building with AI. Each coding course has 6 modules of {site.classesPerModule} classes, and every module ends with a project your child builds themselves.</p>
+  </section>
+
+  <section class="wrap section">
+    <ol class="path">
+      {stages.map((c) => (
+        <li class="card" style={`--c: ${colour[c.id]}`}>
+          <div class="top">
+            <span class="num age">{c.data.ages}</span>
+            <div>
+              <h2>{c.data.title}</h2>
+              <strong>{c.data.tools}</strong>
+            </div>
+          </div>
+          <p>{c.data.lead}</p>
+          {c.data.syllabus.length > 0 && (
+            <details>
+              <summary>The {c.data.syllabus.length} modules</summary>
+              <ol>
+                {c.data.syllabus.map((m) => <li><strong>{m.title}.</strong> {m.milestone}</li>)}
+              </ol>
+            </details>
+          )}
+          {c.data.prerequisite !== 'None' && <p class="small" style="color: var(--ink)">Starts after {c.data.prerequisite}.</p>}
+          <a href={c.data.path}>{c.id === 'ai-builders' ? 'See the AI classes' : `See the ${c.data.title} course`}</a>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="wrap section">
+    <h2>AI modules for any child</h2>
+    <p class="lead" style="margin-top: 10px; margin-bottom: 24px">Five standalone modules that need no coding first. They can be taken alongside any coding course.</p>
+    <ul class="chips">
+      {mods.map((m) => <li><a href={m.data.path}>{m.data.title}</a> <span>· ages {m.data.ages}</span></li>)}
+    </ul>
+  </section>
+
+  <TrialCta heading="Not sure where to start?" text="Book a free trial class. The teacher will see what your child already knows and suggest the right course." />
+</Base>
+<style>
+  .path { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 28px; }
+  .path .card { box-shadow: 6px 6px 0 var(--c); display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+  .age { font-size: 3rem; font-weight: 700; line-height: 1; color: var(--c); min-width: 2.6em; }
+  .path h2 { font-size: 1.9rem; }
+  .path p { max-width: 40em; }
+  summary { font-weight: 700; cursor: pointer; padding: 8px 0; min-height: 44px; }
+  details ol { padding-left: 1.3em; max-width: 44em; }
+  details li + li { margin-top: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chips li { border: var(--line); border-radius: var(--r-sm); padding: 10px 16px; }
+  .chips a { text-decoration: none; }
+</style>

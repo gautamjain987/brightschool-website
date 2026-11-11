@@ -13,7 +13,17 @@ const courses = defineCollection({
     prerequisite: z.string().default('None'),
     order: z.number(),
     path: z.string(), // public URL, e.g. /beginner
-    draft: z.boolean().default(true),
+    seoTitle: z.string(),
+    seoDescription: z.string(),
+    lead: z.string(),
+    // One entry per 8-class module.
+    syllabus: z.array(z.object({
+      title: z.string(),
+      topics: z.array(z.string()),
+      milestone: z.string().optional(),
+    })).default([]),
+    // Short points for pages without a full syllabus yet.
+    points: z.array(z.string()).default([]),
   }),
 });
 

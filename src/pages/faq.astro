@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import TrialCta from '../components/TrialCta.astro';
+import { faq } from '../data/faq';
+import { site } from '../data/site';
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<Base
+  title="Frequently Asked Questions | Bright School"
+  description="Answers for parents about Bright School's live coding and AI classes: the free trial, ages, class times, group size, prices, AI safety, rescheduling and refunds."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <section class="wrap page-head">
+    <h1>Frequently asked questions</h1>
+    <p class="lead">Something not covered here? <a href={site.whatsapp}>Ask us on WhatsApp</a>.</p>
+  </section>
+  <section class="wrap section">
+    <div class="list">
+      {faq.map((f) => (
+        <details>
+          <summary><h2>{f.q}</h2></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+  <TrialCta />
+</Base>
+<style>
+  .list { max-width: 46em; border-top: var(--line); }
+  details { border-bottom: var(--line); }
+  summary { cursor: pointer; padding: 18px 36px 18px 0; position: relative; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; position: absolute; right: 4px; top: 12px; font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; }
+  details[open] summary::after { content: '–'; }
+  summary h2 { font-family: var(--font-body); font-size: 1.15rem; font-weight: 700; line-height: 1.4; display: inline; }
+  details p { padding: 0 0 20px; }
+</style>

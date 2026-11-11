@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import TrialCta from '../components/TrialCta.astro';
+import { getCollection, getEntry } from 'astro:content';
+import { site } from '../data/site';
+const builders = await getEntry('courses', 'ai-builders');
+const mods = (await getCollection('courses')).filter((c) => c.data.kind === 'ai-module').sort((a, b) => a.data.order - b.data.order);
+const b = builders.data;
+---
+<Base title={b.seoTitle} description={b.seoDescription}>
+  <section class="wrap page-head">
+    <p class="tag">Ages 8 to 15 · Live online · With a teacher</p>
+    <h1>AI classes for kids</h1>
+    <p class="lead">Children learn how AI works, where it goes wrong and how to use it safely. Then, once they can code, they build with it.</p>
+    <a href="/book-now" class="btn btn-primary">Book a free trial class</a>
+  </section>
+
+  <section class="wrap section">
+    <h2>Five modules, no coding needed</h2>
+    <p class="lead" style="margin-top: 10px; margin-bottom: 32px">Each module is {site.classesPerModule} classes of {site.classLengthMinutes} minutes and stands on its own. Start with whichever fits your child's age.</p>
+    <div class="row">
+      {mods.map((m) => (
+        <a href={m.data.path} class="card mod">
+          <span class="num age">Ages {m.data.ages}</span>
+          <h3>{m.data.title}</h3>
+          <span>{m.data.builds}.</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="panel row">
+      <div>
+        <p class="num age">Ages {b.ages} · After {b.prerequisite}</p>
+        <h2 style="margin-top: 6px">The AI Builders track</h2>
+        <p class="lead" style="margin-top: 12px">{b.lead}</p>
+        <p style="margin-top: 14px">Not at Python yet? The <a href="/advanced">Advanced course</a> gets there.</p>
+      </div>
+      <div>
+        <h3>What students build</h3>
+        <ul class="ticks" style="margin-top: 14px">{b.points.map((p) => <li>{p}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="prose">
+      <h2 style="margin-top: 0">How we keep AI safe in class</h2>
+      <p>Every AI tool is used with a teacher present in the class. Children are never left to explore a chatbot on their own.</p>
+      <p>Safe use is also part of the teaching: checking facts before trusting an answer, protecting personal information, and knowing which decisions should stay with people.</p>
+    </div>
+  </section>
+
+  <TrialCta />
+</Base>
+<style>
+  .mod { text-decoration: none; font-weight: 400; color: var(--ink); display: flex; flex-direction: column; gap: 8px; box-shadow: 6px 6px 0 var(--green); flex-basis: 300px; transition: transform .1s, box-shadow .1s; }
+  .mod:hover { color: var(--ink); transform: translate(2px, 2px); box-shadow: 4px 4px 0 var(--green); }
+  .age { font-weight: 700; color: var(--green); }
+  .panel { background: var(--mint); border: var(--line); border-radius: var(--r-lg); padding: clamp(24px, 4vw, 44px); gap: 32px 40px; }
+  .panel > * { flex-basis: 320px; }
+</style>

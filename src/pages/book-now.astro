@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base
+  title="Book a Free Trial Coding Class | Bright School"
+  description="Book a free 60-minute trial class for your child with a Bright School teacher. Pick a time that suits you, any day from 10am to 7pm UAE time."
+>
+  <section class="wrap page-head">
+    <p class="tag">Free · {site.classLengthMinutes} minutes · With a teacher</p>
+    <h1>Book a free trial class</h1>
+    <p class="lead">Pick a time below. Times are shown in your own time zone. You will get a confirmation email with the class link.</p>
+  </section>
+
+  <section class="wrap section">
+    <div id="cal-trial" class="cal">
+      <noscript>The booking calendar needs JavaScript. You can also <a href={site.calUrl}>book on Cal.com</a>.</noscript>
+    </div>
+    <p style="margin-top: 20px">Calendar not loading? <a href={site.calUrl}>Open the booking page</a> or <a href={site.whatsapp}>message us on WhatsApp</a>.</p>
+  </section>
+
+  <section class="wrap section" style="padding-bottom: var(--section)">
+    <h2>What happens in the trial</h2>
+    <ul class="ticks" style="margin-top: 20px; max-width: 40em">
+      <li>Your child joins a live {site.classLengthMinutes}-minute class with a teacher and builds something in the first hour.</li>
+      <li>The teacher sees what your child already knows and suggests the right course.</li>
+      <li>There is no obligation to sign up afterwards.</li>
+    </ul>
+  </section>
+
+  <script is:inline define:vars={{ calLink: site.calLink }}>
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "trial", { origin: "https://app.cal.com" });
+    Cal.ns.trial("inline", { elementOrSelector: "#cal-trial", calLink: calLink, config: { layout: "month_view" } });
+    Cal.ns.trial("ui", { hideEventTypeDetails: false, layout: "month_view" });
+  </script>
+</Base>
+<style>
+  .cal { min-height: 520px; border: var(--line); border-radius: var(--r-md); overflow: auto; background: var(--paper); }
+</style>

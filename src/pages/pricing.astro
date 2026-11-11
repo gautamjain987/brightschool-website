@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import TrialCta from '../components/TrialCta.astro';
+import PriceCards from '../components/PriceCards.astro';
+import { site } from '../data/site';
+---
+<Base
+  title="Pricing | Coding and AI Classes for Kids | Bright School"
+  description="Bright School prices: AED 800 per module of 8 one-to-one classes, AED 600 per child in a group of 2, AED 480 per child in a group of 3. Single class AED 120. Free trial class."
+>
+  <section class="wrap page-head">
+    <h1>Pricing</h1>
+    <p class="lead">One price list for every course and AI module. A module is {site.classesPerModule} classes of {site.classLengthMinutes} minutes with a teacher.</p>
+  </section>
+
+  <section class="wrap section">
+    <PriceCards />
+    <p style="margin-top: 24px">Prefer to pay as you go? A single class is <strong>{site.currency} {site.pricing.singleClass}</strong>. The trial class is free.</p>
+  </section>
+
+  <section class="wrap section">
+    <div class="row">
+      <div>
+        <h2>What is included</h2>
+        <ul class="ticks" style="margin-top: 20px">
+          <li>{site.classLengthMinutes}-minute live classes with a teacher</li>
+          <li>1:1, or a small group of up to 3 children</li>
+          <li>A project your child builds in every module</li>
+          <li>Certificates at the main milestones of each coding course</li>
+          <li>Class times you choose, any day from 10am to 7pm UAE time</li>
+        </ul>
+      </div>
+      <div>
+        <h2>How groups work</h2>
+        <p style="margin-top: 20px">Group prices are per child. Bring a sibling or friends and each child pays the group price: 25% less in a group of 2, and 40% less in a group of 3.</p>
+        <h2 style="margin-top: 40px">Cancelling</h2>
+        <p style="margin-top: 20px">You can cancel at any time. You pay only for the classes already taken and we refund the rest. There are no cancellation charges.</p>
+      </div>
+    </div>
+  </section>
+
+  <TrialCta />
+</Base>
+<style>
+  .row > div { flex-basis: 360px; }
+</style>

@@ -1,0 +1,17 @@
+---
+import { site } from '../data/site';
+const note = ["The teacher's full attention, at your child's pace.", 'Bring a sibling or a friend.', 'The lowest price per class.'];
+---
+<div class="row">
+  {site.pricing.modulePerChild.map((p, i) => (
+    <div class="card">
+      <strong>{p.label} {p.discount > 0 && <span class="tag tag-yellow">{p.discount}% off</span>}</strong>
+      <div class="num price">{site.currency} {p.price}</div>
+      <div class="small">{p.children === 1 ? `per module of ${site.classesPerModule} classes` : 'per child, per module'}</div>
+      <p style="margin-top: 14px">{note[i]}</p>
+    </div>
+  ))}
+</div>
+<style>
+  .price { font-size: 2.9rem; font-weight: 700; line-height: 1.2; }
+</style>

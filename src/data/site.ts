@@ -6,6 +6,8 @@ export const site = {
   phone: '+971 58 500 7069',
   whatsapp: 'https://wa.me/971585007069',
   hours: 'Every day, 10am to 7pm UAE time',
+  calLink: 'brightschool/trial',
+  calUrl: 'https://cal.com/brightschool/trial',
   classLengthMinutes: 60,
   classesPerModule: 8,
   currency: 'AED',
@@ -24,8 +26,8 @@ export const site = {
     { big: '60 minutes', small: 'Live with a teacher, never a recording' },
     { big: '1:1 or small group', small: 'Never more than 3 children per teacher' },
   ],
+  // Teachers are added here only once they have agreed to appear on the site.
   team: [
     { name: 'Gautam Jain', role: 'Founder' },
-    { name: 'Ujjawal Singh', role: 'Teacher' },
   ],
 };

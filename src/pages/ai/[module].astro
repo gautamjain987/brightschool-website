@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import CoursePage from '../../components/CoursePage.astro';
+export async function getStaticPaths() {
+  const mods = (await getCollection('courses')).filter((c) => c.data.kind === 'ai-module');
+  return mods.map((course) => ({ params: { module: course.id }, props: { course } }));
+}
+const { course } = Astro.props;
+---
+<CoursePage course={course} />

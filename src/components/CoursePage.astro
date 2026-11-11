@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import TrialCta from './TrialCta.astro';
+import { site } from '../data/site';
+const { course } = Astro.props;
+const d = course.data;
+const colour: Record<string, string> = {
+  beginner: 'var(--orange)', intermediate: 'var(--blue)', advanced: 'var(--violet)', 'ai-builders': 'var(--green)',
+};
+const c = colour[course.id] ?? 'var(--green)';
+const isModule = d.kind === 'ai-module';
+const length = d.syllabus.length
+  ? `${d.syllabus.length} modules of ${site.classesPerModule} classes`
+  : isModule ? `${site.classesPerModule} classes` : `Modules of ${site.classesPerModule} classes`;
+const from = site.pricing.modulePerChild.at(-1).price;
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'Course',
+  name: `${d.title} (ages ${d.ages})`, description: d.seoDescription,
+  provider: { '@type': 'EducationalOrganization', name: site.name, url: site.url },
+};
+---
+<Base title={d.seoTitle} description={d.seoDescription}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <section class="wrap page-head" style={`--c: ${c}`}>
+    <p class="crumb">
+      {isModule ? <a href="/ai">AI classes</a> : <a href="/curriculum">All courses</a>}
+    </p>
+    <p class="num age">Ages {d.ages}</p>
+    <h1>{isModule ? d.title : `${d.title}${d.kind === 'stage' ? ' coding course' : ' track'}`}</h1>
+    <p class="lead">{d.lead}</p>
+    <a href="/book-now" class="btn btn-primary">Book a free trial class</a>
+  </section>
+
+  <section class="wrap section">
+    <dl class="facts-list">
+      <div><dt>Ages</dt><dd>{d.ages}</dd></div>
+      {d.tools && <div><dt>Tools</dt><dd>{d.tools}</dd></div>}
+      <div><dt>Before you start</dt><dd>{d.prerequisite === 'None' ? 'No experience needed' : `${d.prerequisite} first`}</dd></div>
+      <div><dt>Class</dt><dd>{site.classLengthMinutes} minutes, live online</dd></div>
+      <div><dt>Group size</dt><dd>1:1 or up to 3 children</dd></div>
+      <div><dt>Length</dt><dd>{length}</dd></div>
+      <div><dt>Price</dt><dd>From {site.currency} {from} per module. <a href="/pricing">See pricing</a></dd></div>
+    </dl>
+  </section>
+
+  <section class="wrap section">
+    <h2>What your child builds</h2>
+    <p class="lead" style="margin-top: 10px">{d.builds}.</p>
+    {d.points.length > 0 && d.kind === 'ai-track' && (
+      <ul class="ticks" style="margin-top: 20px">{d.points.map((p) => <li>{p}</li>)}</ul>
+    )}
+    {isModule && <p style="margin-top: 16px; max-width: 38em">Every AI tool is used with a teacher present in the class. The class-by-class outline is shared at the trial.</p>}
+  </section>
+
+  {d.syllabus.length > 0 && (
+    <section class="wrap section">
+      <h2>What is covered</h2>
+      <p class="lead" style="margin-top: 10px; margin-bottom: 32px">Each module is {site.classesPerModule} classes and ends with a project your child builds themselves.</p>
+      <ol class="mods">
+        {d.syllabus.map((m, i) => (
+          <li class="card">
+            <span class="num n">Module {i + 1}</span>
+            <h3>{m.title}</h3>
+            <ul class="topics">{m.topics.map((t) => <li>{t}</li>)}</ul>
+            {m.milestone && <p class="mile">{m.milestone}</p>}
+          </li>
+        ))}
+      </ol>
+      {d.kind === 'stage' && d.points.map((p) => <p style="margin-top: 24px; max-width: 38em">{p} <a href="/ai">See the AI classes</a>.</p>)}
+    </section>
+  )}
+
+  <TrialCta />
+</Base>
+<style>
+  .age { font-size: 1.5rem; font-weight: 700; color: var(--c); }
+  .mods { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .mods .card { box-shadow: 6px 6px 0 var(--c, var(--ink)); display: flex; flex-direction: column; gap: 8px; }
+  section:has(.mods) { --c: var(--ink); }
+  .n { font-weight: 700; font-size: 0.94rem; color: var(--muted); }
+  .topics { list-style: disc; padding-left: 1.2em; }
+  .topics li + li { margin-top: 4px; }
+  .mile { margin-top: auto; padding-top: 12px; font-weight: 700; font-size: 0.94rem; }
+</style>
