@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+const p = site.pricing;
+---
+<Base
+  title="Terms and Conditions | Bright School"
+  description="The terms for Bright School's live online coding and AI classes: trial classes, booking, fees, rescheduling, cancellation and refunds."
+>
+  <section class="wrap page-head">
+    <h1>Terms and conditions</h1>
+    <p class="small">Last updated: 11 November 2026</p>
+  </section>
+  <section class="wrap section" style="padding-bottom: var(--section)">
+    <div class="prose">
+      <p>These terms apply when you book or pay for classes with Bright School. "We" means Bright School; "you" means the parent or guardian making the booking. By booking a class you agree to them.</p>
+
+      <h2>1. Our classes</h2>
+      <p>We teach live online coding and AI classes for children aged 6 to 15. Each class is {site.classLengthMinutes} minutes, taught by a teacher, either 1:1 or in a group of up to 3 children. Classes take place over video call; your child needs a laptop or desktop computer and an internet connection.</p>
+
+      <h2>2. The trial class</h2>
+      <p>The first trial class is free, and there is no obligation to enrol afterwards. One free trial is offered per child.</p>
+
+      <h2>3. Booking and class times</h2>
+      <p>You book class times with us in advance, between 10am and 7pm UAE time on any day. We will do our best to keep your child with the same teacher, but we may change the teacher when needed.</p>
+
+      <h2>4. Fees and payment</h2>
+      <ul>
+        <li>A module of {site.classesPerModule} classes costs {site.currency} {p.modulePerChild[0].price} for 1:1 classes, {site.currency} {p.modulePerChild[1].price} per child in a group of 2, and {site.currency} {p.modulePerChild[2].price} per child in a group of 3.</li>
+        <li>A single class costs {site.currency} {p.singleClass}.</li>
+        <li>Fees are paid in advance, before the module or class begins.</li>
+        <li>If we change our prices, the new price applies only to modules you have not yet paid for.</li>
+      </ul>
+
+      <h2>5. Group classes</h2>
+      <p>Group prices apply when 2 or 3 children take the same classes together. If a child leaves a group, the price for the remaining classes changes to match the new group size from the next module.</p>
+
+      <h2>6. Rescheduling and missed classes</h2>
+      <ul>
+        <li>You can reschedule a class up to 24 hours before it starts, at no cost.</li>
+        <li>A class cancelled with less than 24 hours' notice, or missed without notice, may be counted as taken.</li>
+        <li>If we have to cancel a class, we will offer a new time or refund that class.</li>
+        <li>There is no penalty for taking a break. Simply do not book classes for that period.</li>
+      </ul>
+
+      <h2>7. Cancelling and refunds</h2>
+      <p>You can cancel at any time by messaging us. You pay only for the classes already taken, and we refund the rest. There are no cancellation charges.</p>
+
+      <h2>8. Your part</h2>
+      <ul>
+        <li>Make sure your child has a working computer, camera, microphone and internet connection for each class.</li>
+        <li>For children under 9, an adult should be nearby during the class.</li>
+        <li>Give us accurate contact details so we can reach you about classes.</li>
+      </ul>
+
+      <h2>9. Behaviour in class</h2>
+      <p>We want every child to feel safe and able to learn. If a child's behaviour repeatedly disrupts a class or is unkind to others, we will talk to you first. If it continues, we may end the enrolment and refund the classes not yet taken.</p>
+
+      <h2>10. AI tools</h2>
+      <p>Some classes use AI tools. They are always used with a teacher present. AI tools can give wrong answers, and learning to check them is part of what we teach.</p>
+
+      <h2>11. Projects and materials</h2>
+      <p>What your child creates in class belongs to your child. Our lesson materials belong to Bright School and are for your child's own learning; please do not copy or share them. We will not publish your child's work, name or photo without your written permission.</p>
+
+      <h2>12. Recording</h2>
+      <p>We do not record classes without asking you first. Please do not record or share classes that include other children.</p>
+
+      <h2>13. Privacy</h2>
+      <p>Our <a href="/privacy">privacy policy</a> explains how we handle your and your child's information.</p>
+
+      <h2>14. Our responsibility</h2>
+      <p>We will teach with reasonable care and skill. We cannot promise a particular result, since every child learns at their own pace. We are not responsible for problems with your equipment or internet connection. If we fail to provide a class you paid for, our responsibility is limited to refunding the fees for that class.</p>
+
+      <h2>15. Changes to these terms</h2>
+      <p>We may update these terms. The date at the top shows the latest version, and we will tell enrolled families about significant changes before they apply.</p>
+
+      <h2>16. Governing law</h2>
+      <p>These terms are governed by the laws of the United Arab Emirates.</p>
+
+      <h2>17. Contact</h2>
+      <p>Questions about these terms? Message or call us on <a href={site.whatsapp}>{site.phone}</a>.</p>
+    </div>
+  </section>
+</Base>
