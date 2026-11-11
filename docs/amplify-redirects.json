@@ -1,0 +1,38 @@
+[
+  {
+    "source": "/book-a-lesson",
+    "target": "/book-now",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/bookings-checkout/<*>",
+    "target": "/book-now",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/packages",
+    "target": "/pricing",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/members",
+    "target": "/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/materials",
+    "target": "/curriculum",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/category-page",
+    "target": "/blog",
+    "status": "301",
+    "condition": null
+  }
+]

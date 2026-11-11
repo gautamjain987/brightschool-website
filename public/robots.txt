@@ -1,0 +1,6 @@
+# Pre-launch: keep preview builds out of search. Replace at launch with:
+#   User-agent: *
+#   Allow: /
+#   Sitemap: https://www.brightschoolonline.com/sitemap-index.xml
+User-agent: *
+Disallow: /

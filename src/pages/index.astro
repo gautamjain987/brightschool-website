@@ -1,0 +1,17 @@
+---
+// Placeholder. The real home page is built once a design direction is chosen
+// and written down in DESIGN.md.
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../data/site';
+const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title={`${site.name} | ${site.tagline}`} description={site.tagline} noindex>
+  <main>
+    <h1>{site.name}</h1>
+    <p>{site.tagline}. Scaffold only: design pending.</p>
+    <ul>
+      {courses.map((c) => <li>{c.data.title} (ages {c.data.ages}): {c.data.builds}</li>)}
+    </ul>
+  </main>
+</Base>

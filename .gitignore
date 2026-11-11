@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+.DS_Store
+# Contact exports hold children's names and ages. Never commit them.
+*.csv
+*.xlsx
+contacts/
