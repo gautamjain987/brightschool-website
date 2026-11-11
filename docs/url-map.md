@@ -16,9 +16,6 @@ Source: the Wix sitemap, read 11 Nov 2026. Search Console was never set up, so t
 | `/book-now` | Free trial booking (Cal.com) |
 | `/pricing` | Pricing |
 | `/projects` | Student projects |
-| `/blog` | Blog index |
-| `/post/algorithmic-thinking-how-can-you-help-your-kids-perform-better` | Blog post (2020) |
-| `/post/importance-of-coding-for-future-jobs` | Blog post (2020) |
 
 ## New
 
@@ -38,6 +35,11 @@ Source: the Wix sitemap, read 11 Nov 2026. Search Console was never set up, so t
 | `/packages` | `/pricing` |
 | `/members` | `/` (provisional) |
 | `/materials` | `/curriculum` (provisional) |
-| `/category-page` | `/blog` (provisional) |
+| `/category-page` | `/about` (provisional) |
+| `/blog` | `/about` (until a new blog exists) |
+| `/post/algorithmic-thinking-how-can-you-help-your-kids-perform-better` | `/about` |
+| `/post/importance-of-coding-for-future-jobs` | `/about` |
 
 The three provisional targets are a best guess until Search Console shows whether those pages get visits.
+
+The two 2020 blog posts were not migrated (decided 12 Nov 2026): dated figures and a former writer's byline. Revisit if Search Console shows either address earning visits.

@@ -31,7 +31,19 @@
   },
   {
     "source": "/category-page",
-    "target": "/blog",
+    "target": "/about",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/blog",
+    "target": "/about",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/post/<*>",
+    "target": "/about",
     "status": "301",
     "condition": null
   },
