@@ -2,6 +2,7 @@
 import { site } from '../data/site';
 import Sun from './Sun.astro';
 const links = [
+  { href: '/', label: 'Home' },
   { href: '/curriculum', label: 'Courses' },
   { href: '/ai', label: 'AI classes' },
   { href: '/pricing', label: 'Pricing' },
@@ -31,7 +32,7 @@ const links = [
   nav a { text-decoration: none; padding: 10px 4px; display: inline-block; }
   .nav-wide { display: flex; gap: 24px; }
   .nav-narrow { display: none; }
-  @media (max-width: 860px) {
+  @media (max-width: 960px) {
     .nav-wide { display: none; }
     .nav-narrow { display: block; flex-basis: 100%; }
     .nav-narrow summary { font-weight: 700; padding: 10px 0; cursor: pointer; min-height: 44px; }
