@@ -7,6 +7,7 @@ export const site = {
   email: 'gautam.jain987@gmail.com',
   whatsapp: 'https://wa.me/971585007069',
   hours: 'Every day, 10am to 7pm UAE time',
+  gaId: 'G-5Q6HHKB74K', // Google Analytics 4; only loads on the live domain
   calLink: 'brightschool/trial',
   calUrl: 'https://cal.com/brightschool/trial',
   classLengthMinutes: 60,

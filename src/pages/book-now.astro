@@ -33,6 +33,9 @@ import { site } from '../data/site';
     Cal("init", "trial", { origin: "https://app.cal.com" });
     Cal.ns.trial("inline", { elementOrSelector: "#cal-trial", calLink: calLink, config: { layout: "month_view", theme: "light" } });
     Cal.ns.trial("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view" });
+    Cal.ns.trial("on", { action: "bookingSuccessful", callback: function () {
+      if (window.gtag) gtag("event", "trial_booked");
+    } });
   </script>
 </Base>
 <style>

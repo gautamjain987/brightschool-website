@@ -28,6 +28,23 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <slot name="head" />
+    <script is:inline define:vars={{ gaId: site.gaId }}>
+      // Visitor statistics. Runs only on the live site, so previews and local work are not counted.
+      if (/(^|\.)brightschoolonline\.com$/.test(location.hostname)) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', gaId);
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
+          if (a) gtag('event', 'whatsapp_click', { page_path: location.pathname });
+        });
+      }
+    </script>
   </head>
   <body>
     <a href="#main" class="skip">Skip to content</a>
