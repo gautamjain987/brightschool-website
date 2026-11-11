@@ -64,7 +64,12 @@ The hero illustration is built from real code: blocks, a Python snippet, a model
 
 ## Logo
 
-Stand-in for now: a yellow sun disc with an ink outline beside "Bright School" in Fredoka 700. Replace with the sun from the original artwork once the file is available.
+The sun comes from the original 2020 logo file (`brightschool_logo.ai`); its shapes are unchanged.
+
+- **Header mark**: the sun in `--yellow` with the ink outline, 52px wide, beside "Bright School" in Fredoka 700 ink. Component: `src/components/Sun.astro`.
+- **Browser-tab icon**: the plain yellow sun on an ink rounded square (`public/favicon.svg`), because the outlined sun blurs below about 32px.
+- **Plain sun**: `public/logo-sun.svg`, for social images and documents.
+- Not carried over: the "Made in SG with ♥" line, the navy wordmark typeface and the original lighter yellow (#FFD741).
 
 ## Voice
 

@@ -22,7 +22,7 @@ export const site = {
     { big: 'Since 2020', small: 'Six years of teaching children to code' },
     { big: '500+ children', small: 'Have taken a class with us' },
     { big: '60 minutes', small: 'Live with a teacher, never a recording' },
-    { big: '1:1 or up to 3', small: 'Every child gets heard' },
+    { big: '1:1 or small group', small: 'Never more than 3 children per teacher' },
   ],
   team: [
     { name: 'Gautam Jain', role: 'Founder' },

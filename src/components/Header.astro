@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import Sun from './Sun.astro';
 const links = [
   { href: '/curriculum', label: 'Courses' },
   { href: '/ai', label: 'AI classes' },
@@ -10,7 +11,7 @@ const links = [
 ---
 <header class="wrap head">
   <a href="/" class="logo" aria-label={`${site.name} home`}>
-    <span class="sun" aria-hidden="true"></span>{site.name}
+    <Sun />{site.name}
   </a>
   <nav aria-label="Main" class="nav-wide">
     {links.map((l) => <a href={l.href}>{l.label}</a>)}
@@ -26,7 +27,7 @@ const links = [
 <style>
   .head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; padding-block: 18px; }
   .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; color: var(--ink); }
-  .sun { width: 36px; height: 36px; background: var(--yellow); border: var(--line); border-radius: 50%; }
+  .logo :global(.sun) { width: 52px; height: auto; flex: none; }
   nav a { text-decoration: none; padding: 10px 4px; display: inline-block; }
   .nav-wide { display: flex; gap: 24px; }
   .nav-narrow { display: none; }
@@ -37,5 +38,5 @@ const links = [
     .nav-narrow nav { display: flex; flex-direction: column; border-top: var(--line); }
     .nav-narrow nav a { padding: 12px 0; border-bottom: 1px solid var(--lilac); }
   }
-  @media (max-width: 420px) { .logo { font-size: 1.35rem; } .sun { width: 30px; height: 30px; } }
+  @media (max-width: 420px) { .logo { font-size: 1.35rem; } .logo :global(.sun) { width: 44px; } }
 </style>
