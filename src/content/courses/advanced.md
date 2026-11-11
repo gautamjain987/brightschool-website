@@ -9,7 +9,7 @@ order: 3
 path: "/advanced"
 seoTitle: "JavaScript and Python Classes for Kids Ages 12-15 | Bright School"
 seoDescription: "Live online coding classes for ages 12 to 15. Real text-based code: JavaScript games, game physics and websites, then Python. 1:1 or small group. Free trial class."
-lead: "Students write real, text-based code. They build browser games in JavaScript, learn game physics, make their own website, and then move on to Python."
+lead: "Students write real, text-based code. They build browser games in JavaScript, learn game physics and make their own website, then learn Python from the ground up."
 syllabus:
   - title: "Introduction to game development"
     topics:
@@ -53,8 +53,40 @@ syllabus:
       - "CSS basics"
       - "Changing a page with JavaScript"
     milestone: "Create your own mini website"
+  - title: "Introduction to Python"
+    topics:
+      - "Writing and running your first programs"
+      - "Variables, numbers and text"
+      - "Getting input and making decisions with if and else"
+      - "Loops: for and while"
+      - "Reading error messages and fixing bugs"
+    milestone: "Create a number guessing game"
+  - title: "Functions and collections"
+    topics:
+      - "Writing your own functions"
+      - "Lists and looping through them"
+      - "Dictionaries: storing things by name"
+      - "Working with text"
+      - "Breaking a big problem into small functions"
+    milestone: "Create a quiz game with a high-score table"
+  - title: "Building bigger programs"
+    topics:
+      - "Using Python libraries"
+      - "Random numbers and simple simulations"
+      - "Drawing and animation with code"
+      - "Saving and loading files"
+      - "Planning a project before coding it"
+    milestone: "Create your own text adventure or drawing program"
+  - title: "Python with data"
+    topics:
+      - "Reading data from a file"
+      - "Counting, sorting and finding patterns"
+      - "Turning numbers into charts"
+      - "Getting live data from the internet"
+      - "Asking good questions of data"
+    milestone: "Capstone: a data project on a topic you choose. Python certificate"
 points:
-  - "After the six JavaScript modules, students continue with Python, which is also the starting point for the AI Builders track."
+  - "Modules 1 to 6 are JavaScript and the web; modules 7 to 10 are Python. Python is also the starting point for the AI Builders track."
 ---
 
 

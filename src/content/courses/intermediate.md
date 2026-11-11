@@ -3,13 +3,13 @@ title: "Intermediate"
 kind: "stage"
 ages: "9-11"
 tools: "Blockly and app builders"
-builds: "Larger games, a mobile app prototype and a first trained model"
+builds: "Larger games, a mobile app, and a first look at how AI thinks"
 prerequisite: "None"
 order: 2
 path: "/intermediate"
 seoTitle: "Coding Classes for Kids Ages 9-11 | Intermediate | Bright School"
 seoDescription: "Live online coding classes for children aged 9 to 11. Game design, mobile apps and working with data, taught 1:1 or in small groups. Free trial class."
-lead: "Children become confident coders. They design bigger games, plan and build mobile apps, and start working with data."
+lead: "Children become confident coders. They design bigger games, plan and build mobile apps, start working with data, and finish with a first look at how AI thinks."
 syllabus:
   - title: "Introduction to programming and storytelling"
     topics:
@@ -55,6 +55,15 @@ syllabus:
       - "Data privacy and security"
       - "Prototype and code your app"
     milestone: "Capstone project. App Development certificate"
+  - title: "How AI thinks"
+    topics:
+      - "What AI is, and where you already meet it every day"
+      - "How a computer learns from examples instead of instructions"
+      - "Spotting patterns: sorting and classifying"
+      - "Teaching a computer with your own examples"
+      - "When AI gets it wrong, and why"
+      - "Using AI safely and kindly"
+    milestone: "Capstone: teach a computer to tell two things apart, then try to fool it"
 ---
 
 
