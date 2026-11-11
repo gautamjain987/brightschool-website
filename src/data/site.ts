@@ -4,6 +4,7 @@ export const site = {
   tagline: 'Live coding and AI classes for ages 6 to 15',
   url: 'https://www.brightschoolonline.com',
   phone: '+971 58 500 7069',
+  email: 'gautam.jain987@gmail.com',
   whatsapp: 'https://wa.me/971585007069',
   hours: 'Every day, 10am to 7pm UAE time',
   calLink: 'brightschool/trial',

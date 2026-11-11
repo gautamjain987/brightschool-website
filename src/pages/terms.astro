@@ -28,7 +28,6 @@ const p = site.pricing;
       <ul>
         <li>A module of {site.classesPerModule} classes costs {site.currency} {p.modulePerChild[0].price} for 1:1 classes, {site.currency} {p.modulePerChild[1].price} per child in a group of 2, and {site.currency} {p.modulePerChild[2].price} per child in a group of 3.</li>
         <li>A single class costs {site.currency} {p.singleClass}.</li>
-        <li>Fees are paid in advance, before the module or class begins.</li>
         <li>If we change our prices, the new price applies only to modules you have not yet paid for.</li>
       </ul>
 
@@ -49,7 +48,7 @@ const p = site.pricing;
       <h2>8. Your part</h2>
       <ul>
         <li>Make sure your child has a working computer, camera, microphone and internet connection for each class.</li>
-        <li>For children under 9, an adult should be nearby during the class.</li>
+        <li>For children under 8, an adult should be nearby during the class.</li>
         <li>Give us accurate contact details so we can reach you about classes.</li>
       </ul>
 
@@ -74,11 +73,8 @@ const p = site.pricing;
       <h2>15. Changes to these terms</h2>
       <p>We may update these terms. The date at the top shows the latest version, and we will tell enrolled families about significant changes before they apply.</p>
 
-      <h2>16. Governing law</h2>
-      <p>These terms are governed by the laws of the United Arab Emirates.</p>
-
-      <h2>17. Contact</h2>
-      <p>Questions about these terms? Message or call us on <a href={site.whatsapp}>{site.phone}</a>.</p>
+      <h2>16. Contact</h2>
+      <p>Questions about these terms? Message or call us on <a href={site.whatsapp}>{site.phone}</a>, or email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
     </div>
   </section>
 </Base>
