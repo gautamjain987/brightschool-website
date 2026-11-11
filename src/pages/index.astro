@@ -1,17 +1,200 @@
 ---
-// Placeholder. The real home page is built once a design direction is chosen
-// and written down in DESIGN.md.
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { site } from '../data/site';
-const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+
+const all = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+const stages = all.filter((c) => c.data.kind !== 'ai-module');
+const modules = all.filter((c) => c.data.kind === 'ai-module');
+const colour: Record<string, string> = {
+  beginner: 'var(--orange)', intermediate: 'var(--blue)', advanced: 'var(--violet)', 'ai-builders': 'var(--green)',
+};
+const priceNote = ['The teacher\'s full attention, at your child\'s pace.', 'Bring a sibling or a friend.', 'The lowest price per class.'];
+
+// Quotes carried over from the previous site.
+const quotes = [
+  { text: 'Wednesday is the favorite day of the week of my son. He jumps up and down before the coding class with Bright School.', who: 'Rachel, mother of an 8-year-old' },
+  { text: 'Bright School has awesome teachers! The teacher really helped spark the interest of coding and self-motivation of my kid.', who: 'Dan, dad of a 7-year-old' },
+  { text: 'I love teacher Abhay! My dream is to become the best coder in the world.', who: 'Evan, 8 years old' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: site.name,
+  url: site.url,
+  description: site.tagline,
+  telephone: site.phone,
+  areaServed: ['AE', 'SG'],
+};
 ---
-<Base title={`${site.name} | ${site.tagline}`} description={site.tagline} noindex>
-  <main>
-    <h1>{site.name}</h1>
-    <p>{site.tagline}. Scaffold only: design pending.</p>
-    <ul>
-      {courses.map((c) => <li>{c.data.title} (ages {c.data.ages}): {c.data.builds}</li>)}
-    </ul>
-  </main>
+<Base
+  title="Live Coding and AI Classes for Kids, Ages 6-15 | Bright School"
+  description="Live online coding and AI classes for children aged 6 to 15, taught 1:1 or in small groups by a real teacher. Blockly, JavaScript, Python and AI. Book a free trial class."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="wrap hero">
+    <div class="hero-text">
+      <p class="tag">Live online · Ages 6 to 15 · 1:1 or small group</p>
+      <h1>From first blocks to building with AI</h1>
+      <p class="lead">Live coding and AI classes with a real teacher. Children snap blocks together at 6, write Python at 12, and train their own AI models along the way.</p>
+      <div class="actions">
+        <a href="/book-now" class="btn btn-primary">Book a free trial class</a>
+        <a href="#courses">Pick a course by age</a>
+      </div>
+      <p class="small">{site.classLengthMinutes} minutes with a teacher. Free, and no payment details needed.</p>
+    </div>
+
+    <div class="journey" role="img" aria-label="A child's journey: Blockly blocks at age 6, Python at age 12, then an AI model">
+      <div class="step">
+        <span class="num when">Age 6</span>
+        <div class="blocks">
+          <span style="background: var(--orange)">when flag clicked</span>
+          <span style="background: var(--blue)">move 10 steps</span>
+          <span style="background: var(--violet)">say "I made this!"</span>
+        </div>
+      </div>
+      <div class="step">
+        <span class="num when">Age 12</span>
+        <pre><code>for step in range(10):
+    player.move(step)
+print("I made this!")</code></pre>
+      </div>
+      <div class="step">
+        <span class="num when">Then AI</span>
+        <div class="model">
+          <strong>My model: cat or dog?</strong>
+          <div class="meter"><div></div></div>
+          <span class="small" style="color: var(--ink)">92% sure it's a cat. Now find a photo that fools it.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band facts" aria-label="Bright School in numbers">
+    <div class="wrap row">
+      {site.facts.map((f) => <div><div class="num big">{f.big}</div><div>{f.small}</div></div>)}
+    </div>
+  </section>
+
+  <section id="courses" class="wrap section">
+    <h2>How old is your child?</h2>
+    <p class="lead">Each stage has its own tools and projects. Choose an age to see the course.</p>
+    <div class="row">
+      {stages.map((c) => (
+        <a href={c.data.path} class="card stage" style={`--c: ${colour[c.id]}`}>
+          <span class="num age">{c.data.ages}</span>
+          <h3>{c.data.title}</h3>
+          <strong>{c.data.tools}</strong>
+          <span>{c.data.builds}.{c.data.prerequisite !== 'None' && ` After ${c.data.prerequisite}.`}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section id="ai" class="wrap section">
+    <div class="ai row">
+      <div>
+        <h2>AI classes, no coding needed first</h2>
+        <p class="lead">Children learn how AI works, where it goes wrong and how to use it safely. Each module is {site.classesPerModule} classes and stands on its own.</p>
+        <p class="small" style="color: var(--ink); margin-top: 14px">Every AI tool is used with a teacher present in the class.</p>
+      </div>
+      <ul class="modules">
+        {modules.map((m) => <li><a href={m.data.path}>{m.data.title}</a> <span>· ages {m.data.ages}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section id="pricing" class="wrap section">
+    <h2>Simple pricing</h2>
+    <p class="lead">A module is {site.classesPerModule} classes of {site.classLengthMinutes} minutes. Learning with a sibling or friend lowers the price for each child.</p>
+    <div class="row">
+      {site.pricing.modulePerChild.map((p, i) => (
+        <div class="card">
+          <strong>{p.label} {p.discount > 0 && <span class="tag tag-yellow">{p.discount}% off</span>}</strong>
+          <div class="num price">{site.currency} {p.price}</div>
+          <div class="small">{p.children === 1 ? `per module of ${site.classesPerModule} classes` : 'per child, per module'}</div>
+          <p style="margin-top: 14px">{priceNote[i]}</p>
+        </div>
+      ))}
+    </div>
+    <p class="small" style="margin-top: 20px">Prefer to pay as you go? A single class is {site.currency} {site.pricing.singleClass}. The trial class is free.</p>
+  </section>
+
+  <section class="band quotes">
+    <div class="wrap">
+      <h2>In their words</h2>
+      <div class="row">
+        {quotes.map((q) => (
+          <figure class="card">
+            <blockquote>{q.text}</blockquote>
+            <figcaption>{q.who}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" style="padding-bottom: var(--section)">
+    <div class="trial">
+      <div>
+        <h2>Try one class, free</h2>
+        <p class="lead">Pick a time that suits you, any day from 10am to 7pm UAE time. Your child builds something in the first hour.</p>
+      </div>
+      <div class="actions">
+        <a href="/book-now" class="btn btn-yellow">Pick a trial time</a>
+        <a href={site.whatsapp} class="btn btn-white">Ask on WhatsApp</a>
+      </div>
+    </div>
+  </section>
 </Base>
+
+<style>
+  .hero { display: flex; flex-wrap: wrap; align-items: center; gap: 48px 56px; padding-block: 48px 80px; }
+  .hero-text { flex: 1 1 440px; display: flex; flex-direction: column; align-items: flex-start; gap: 22px; min-width: 0; }
+  .actions { display: flex; flex-wrap: wrap; gap: 16px 20px; align-items: center; }
+
+  .journey { flex: 1 1 380px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .step { display: flex; align-items: flex-start; gap: 16px; }
+  .when { flex: 0 0 76px; font-weight: 700; font-size: 1.2rem; padding-top: 12px; }
+  .blocks { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .blocks span { color: #fff; font-weight: 700; border: var(--line); border-radius: 12px; padding: 10px 16px; }
+  pre { flex: 1; min-width: 0; background: var(--ink); color: #F4F2FF; border-radius: 16px; padding: 18px 20px; font-family: var(--font-mono); font-size: 0.94rem; line-height: 1.6; overflow-x: auto; }
+  code { font-family: inherit; }
+  .model { flex: 1; min-width: 0; background: var(--mint); border: var(--line); border-radius: 16px; padding: 16px 20px; box-shadow: 5px 5px 0 var(--ink); }
+  .meter { margin-block: 8px 6px; height: 14px; background: #fff; border: 2px solid var(--ink); border-radius: 8px; overflow: hidden; }
+  .meter div { width: 92%; height: 100%; background: var(--green); }
+
+  .facts { background: var(--yellow); padding-block: 24px; }
+  .facts .row { gap: 20px; }
+  .big { font-size: 1.9rem; font-weight: 700; line-height: 1.2; }
+
+  .stage { text-decoration: none; font-weight: 400; color: var(--ink); display: flex; flex-direction: column; gap: 8px; box-shadow: 6px 6px 0 var(--c); transition: transform .1s, box-shadow .1s; }
+  .stage:hover { color: var(--ink); transform: translate(2px, 2px); box-shadow: 4px 4px 0 var(--c); }
+  .age { font-size: 3rem; font-weight: 700; line-height: 1; color: var(--c); }
+
+  .ai { background: var(--mint); border: var(--line); border-radius: var(--r-lg); padding: clamp(24px, 4vw, 44px); gap: 32px 40px; }
+  .ai > * { flex-basis: 320px; }
+  .ai .lead { margin-top: 12px; }
+  .modules { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+  .modules li { background: var(--paper); border: var(--line); border-radius: var(--r-sm); padding: 10px 16px; }
+  .modules a { text-decoration: none; }
+
+  .price { font-size: 2.9rem; font-weight: 700; line-height: 1.2; }
+
+  .quotes { background: var(--lilac); margin-top: var(--section); padding-block: 64px; }
+  .quotes h2 { margin-bottom: 28px; }
+  blockquote { font-size: 1.2rem; font-weight: 500; }
+  figcaption { margin-top: 14px; font-weight: 700; }
+
+  .trial { background: var(--purple); color: #fff; border: var(--line); border-radius: var(--r-lg); box-shadow: 8px 8px 0 var(--ink); padding: clamp(28px, 5vw, 52px); display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; }
+  .trial > div:first-child { flex: 1 1 420px; min-width: 0; }
+  .trial .lead { margin-top: 12px; }
+
+  @media (max-width: 480px) {
+    .when { flex-basis: 62px; font-size: 1.05rem; }
+    .step { gap: 10px; }
+    .actions .btn { width: 100%; text-align: center; }
+  }
+</style>

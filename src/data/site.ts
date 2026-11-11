@@ -17,6 +17,13 @@ export const site = {
       { label: 'Group of 3', children: 3, price: 480, discount: 40 },
     ],
   },
+  // Gautam, 11 Nov 2026: 500+ children including trial classes.
+  facts: [
+    { big: 'Since 2020', small: 'Six years of teaching children to code' },
+    { big: '500+ children', small: 'Have taken a class with us' },
+    { big: '60 minutes', small: 'Live with a teacher, never a recording' },
+    { big: '1:1 or up to 3', small: 'Every child gets heard' },
+  ],
   team: [
     { name: 'Gautam Jain', role: 'Founder' },
     { name: 'Ujjawal Singh', role: 'Teacher' },
