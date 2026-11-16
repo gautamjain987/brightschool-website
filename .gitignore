@@ -8,3 +8,7 @@ dist/
 *.csv
 *.xlsx
 contacts/
+
+# Files Claude saves for review, not part of the site
+Claude outputs/
+videos-original/

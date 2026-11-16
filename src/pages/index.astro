@@ -46,6 +46,23 @@ const jsonLd = {
       <p class="small">{site.classLengthMinutes} minutes with a teacher. Free, and no payment details needed.</p>
     </div>
 
+    <figure class="photo">
+      <picture>
+        <source srcset="/images/kids-coding.webp" type="image/webp" />
+        <img src="/images/kids-coding.jpg" width="1344" height="813" alt="Two children smiling as they code together on a laptop" fetchpriority="high" />
+      </picture>
+    </figure>
+  </section>
+
+  <section class="band facts" aria-label="Bright School in numbers">
+    <div class="wrap row">
+      {site.facts.map((f) => <div><div class="num big">{f.big}</div><div>{f.small}</div></div>)}
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <h2>From blocks to Python to AI</h2>
+    <p class="lead">What a child's code looks like as they grow with us.</p>
     <div class="journey" role="img" aria-label="A child's journey: Blockly blocks at age 6, Python at age 12, then an AI model">
       <div class="step">
         <span class="num when">Age 6</span>
@@ -69,12 +86,6 @@ print("I made this!")</code></pre>
           <span class="small" style="color: var(--ink)">92% sure it's a cat. Now find a photo that fools it.</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="band facts" aria-label="Bright School in numbers">
-    <div class="wrap row">
-      {site.facts.map((f) => <div><div class="num big">{f.big}</div><div>{f.small}</div></div>)}
     </div>
   </section>
 
@@ -155,9 +166,12 @@ print("I made this!")</code></pre>
   .hero-text { flex: 1 1 440px; display: flex; flex-direction: column; align-items: flex-start; gap: 22px; min-width: 0; }
   .actions { display: flex; flex-wrap: wrap; gap: 16px 20px; align-items: center; }
 
-  .journey { flex: 1 1 380px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-  .step { display: flex; align-items: flex-start; gap: 16px; }
-  .when { flex: 0 0 76px; font-weight: 700; font-size: 1.2rem; padding-top: 12px; }
+  .photo { flex: 1 1 380px; min-width: 0; margin: 0; position: relative; }
+  .photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 40% 30%; border: var(--line); border-radius: var(--r-lg); box-shadow: 8px 8px 0 var(--yellow); }
+
+  .journey { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 32px; }
+  .step { flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+  .when { font-weight: 700; font-size: 1.2rem; }
   .blocks { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
   .blocks span { color: #fff; font-weight: 700; border: var(--line); border-radius: 12px; padding: 10px 16px; }
   pre { flex: 1; min-width: 0; background: var(--ink); color: #F4F2FF; border-radius: 16px; padding: 18px 20px; font-family: var(--font-mono); font-size: 0.94rem; line-height: 1.6; overflow-x: auto; }
