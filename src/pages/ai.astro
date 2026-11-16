@@ -44,6 +44,23 @@ const b = builders.data;
     </div>
   </section>
 
+  {b.syllabus.length > 0 && (
+    <section class="wrap section">
+      <h2>What AI Builders covers</h2>
+      <p class="lead" style="margin-top: 10px; margin-bottom: 32px">{b.syllabus.length} modules of {site.classesPerModule} classes, each ending in a project.</p>
+      <ol class="mods">
+        {b.syllabus.map((m, i) => (
+          <li class="card">
+            <span class="num n">Module {i + 1}</span>
+            <h3>{m.title}</h3>
+            <ul class="topics">{m.topics.map((t) => <li>{t}</li>)}</ul>
+            {m.milestone && <p class="mile">{m.milestone}</p>}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
   <section class="wrap section">
     <div class="prose">
       <h2 style="margin-top: 0">How we keep AI safe in class</h2>
@@ -60,4 +77,10 @@ const b = builders.data;
   .age { font-weight: 700; color: var(--green); }
   .panel { background: var(--mint); border: var(--line); border-radius: var(--r-lg); padding: clamp(24px, 4vw, 44px); gap: 32px 40px; }
   .panel > * { flex-basis: 320px; }
+  .mods { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .mods .card { box-shadow: 6px 6px 0 var(--green); display: flex; flex-direction: column; gap: 8px; }
+  .n { font-weight: 700; font-size: 0.94rem; color: var(--muted); }
+  .topics { list-style: disc; padding-left: 1.2em; }
+  .topics li + li { margin-top: 4px; }
+  .mile { margin-top: auto; padding-top: 12px; font-weight: 700; font-size: 0.94rem; }
 </style>

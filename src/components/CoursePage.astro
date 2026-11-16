@@ -49,7 +49,7 @@ const jsonLd = {
     {d.points.length > 0 && d.kind === 'ai-track' && (
       <ul class="ticks" style="margin-top: 20px">{d.points.map((p) => <li>{p}</li>)}</ul>
     )}
-    {isModule && <p style="margin-top: 16px; max-width: 38em">Every AI tool is used with a teacher present in the class. The class-by-class outline is shared at the trial.</p>}
+    {isModule && <p style="margin-top: 16px; max-width: 38em">Every AI tool is used with a teacher present in the class.</p>}
   </section>
 
   {d.syllabus.length > 0 && (
@@ -70,6 +70,16 @@ const jsonLd = {
     </section>
   )}
 
+  {d.classes.length > 0 && (
+    <section class="wrap section">
+      <h2>Class by class</h2>
+      <p class="lead" style="margin-top: 10px; margin-bottom: 28px">{d.classes.length} classes of {site.classLengthMinutes} minutes.</p>
+      <ol class="classes">
+        {d.classes.map((c, i) => <li><span class="num cn">Class {i + 1}</span><span>{c}</span></li>)}
+      </ol>
+    </section>
+  )}
+
   <TrialCta />
 </Base>
 <style>
@@ -80,5 +90,10 @@ const jsonLd = {
   .n { font-weight: 700; font-size: 0.94rem; color: var(--muted); }
   .topics { list-style: disc; padding-left: 1.2em; }
   .topics li + li { margin-top: 4px; }
+  .classes { list-style: none; padding: 0; margin: 0; max-width: 46em; border: var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .classes li { display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 14px 20px; border-bottom: 1px solid var(--lilac); }
+  .classes li:last-child { border-bottom: 0; }
+  .cn { flex: 0 0 5.5em; font-weight: 700; color: var(--green); }
+  .classes li span:last-child { flex: 1 1 16em; }
   .mile { margin-top: auto; padding-top: 12px; font-weight: 700; font-size: 0.94rem; }
 </style>

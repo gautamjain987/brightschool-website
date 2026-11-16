@@ -22,6 +22,8 @@ const courses = defineCollection({
       topics: z.array(z.string()),
       milestone: z.string().optional(),
     })).default([]),
+    // Class-by-class outline for a single 8-class module.
+    classes: z.array(z.string()).default([]),
     // Short points for pages without a full syllabus yet.
     points: z.array(z.string()).default([]),
   }),
