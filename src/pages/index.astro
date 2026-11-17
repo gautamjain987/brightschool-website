@@ -2,6 +2,13 @@
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { site } from '../data/site';
+import { existsSync } from 'node:fs';
+
+// Short clips of past students, carried over from the previous site.
+// Each needs public/videos/kid-N.mp4 and a still frame kid-N.jpg; a clip without its files is skipped.
+const clips = [1, 2, 3]
+  .map((n) => ({ src: `/videos/kid-${n}.mp4`, poster: `/videos/kid-${n}.jpg`, label: `Video ${n}: a Bright School student talking about their classes` }))
+  .filter((c) => existsSync(`public${c.src}`) && existsSync(`public${c.poster}`));
 
 const all = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
 const stages = all.filter((c) => c.data.kind !== 'ai-module');
@@ -136,6 +143,15 @@ print("I made this!")</code></pre>
   <section class="band quotes">
     <div class="wrap">
       <h2>In their words</h2>
+      {clips.length > 0 && (
+        <div class="clips">
+          {clips.map((c) => (
+            <figure class="clip">
+              <video src={c.src} poster={c.poster} controls preload="none" playsinline aria-label={c.label}></video>
+            </figure>
+          ))}
+        </div>
+      )}
       <div class="row">
         {quotes.map((q) => (
           <figure class="card">
@@ -199,6 +215,9 @@ print("I made this!")</code></pre>
 
   .quotes { background: var(--lilac); margin-top: var(--section); padding-block: 64px; }
   .quotes h2 { margin-bottom: 28px; }
+  .clips { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 32px; }
+  .clip { margin: 0; }
+  .clip video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--ink); border: var(--line); border-radius: var(--r-md); box-shadow: 6px 6px 0 var(--ink); }
   blockquote { font-size: 1.2rem; font-weight: 500; }
   figcaption { margin-top: 14px; font-weight: 700; }
 
