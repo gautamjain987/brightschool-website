@@ -19,12 +19,15 @@ const colour: Record<string, string> = {
 const priceNote = ['The teacher\'s full attention, at your child\'s pace.', 'Bring a sibling or a friend.', 'The lowest price per class.'];
 
 // Quotes carried over from the previous site.
-const quotes = [
+const kidQuotes = [
+  { text: 'I love teacher Abhay! My dream is to become the best coder in the world.', who: 'Evan, 8 years old' },
+  { text: "I'm very happy with the coding classes. My coding skill has improved significantly.", who: 'Alex, 12 years old' },
+];
+const parentQuotes = [
   { text: 'Wednesday is the favorite day of the week of my son. He jumps up and down before the coding class with Bright School.', who: 'Rachel, mother of an 8-year-old' },
   { text: 'Bright School has awesome teachers! The teacher really helped spark the interest of coding and self-motivation of my kid.', who: 'Dan, dad of a 7-year-old' },
-  { text: 'I love teacher Abhay! My dream is to become the best coder in the world.', who: 'Evan, 8 years old' },
+  { text: 'My kids have taken the trial lesson with Bright School and they love it. The teacher was very patient, listening and experienced in helping kids relate coding concepts.', who: 'Mandy, mother of 6-year-old twins' },
 ];
-
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
@@ -143,6 +146,8 @@ print("I made this!")</code></pre>
   <section class="band quotes">
     <div class="wrap">
       <h2>In their words</h2>
+
+      <h3 class="who-head"><span class="tag tag-kids">Students</span> What the children say</h3>
       {clips.length > 0 && (
         <div class="clips">
           {clips.map((c) => (
@@ -153,7 +158,17 @@ print("I made this!")</code></pre>
         </div>
       )}
       <div class="row">
-        {quotes.map((q) => (
+        {kidQuotes.map((q) => (
+          <figure class="card kid">
+            <blockquote>{q.text}</blockquote>
+            <figcaption>{q.who}</figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <h3 class="who-head parents-head"><span class="tag tag-parents">Parents</span> What the parents say</h3>
+      <div class="row">
+        {parentQuotes.map((q) => (
           <figure class="card">
             <blockquote>{q.text}</blockquote>
             <figcaption>{q.who}</figcaption>
@@ -215,7 +230,12 @@ print("I made this!")</code></pre>
 
   .quotes { background: var(--lilac); margin-top: var(--section); padding-block: 64px; }
   .quotes h2 { margin-bottom: 28px; }
-  .clips { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 32px; }
+  .who-head { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 1.35rem; margin-bottom: 20px; }
+  .parents-head { margin-top: 48px; }
+  .tag-kids { background: var(--yellow); border: 2px solid var(--ink); }
+  .tag-parents { background: var(--paper); border: 2px solid var(--ink); }
+  .card.kid { background: #FFF6D6; }
+  .clips { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 24px; }
   .clip { margin: 0; }
   .clip video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--ink); border: var(--line); border-radius: var(--r-md); box-shadow: 6px 6px 0 var(--ink); }
   blockquote { font-size: 1.2rem; font-weight: 500; }
