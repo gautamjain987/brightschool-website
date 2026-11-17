@@ -12,15 +12,7 @@ export const site = {
   calUrl: 'https://cal.com/brightschool/trial',
   classLengthMinutes: 60,
   classesPerModule: 8,
-  currency: 'AED',
-  pricing: {
-    singleClass: 120,
-    modulePerChild: [
-      { label: '1:1', children: 1, price: 800, discount: 0 },
-      { label: 'Group of 2', children: 2, price: 600, discount: 25 },
-      { label: 'Group of 3', children: 3, price: 480, discount: 40 },
-    ],
-  },
+  // Prices live in src/data/prices.ts.
   // Gautam, 11 Nov 2026: 500+ children including trial classes.
   facts: [
     { big: 'Since 2020', small: 'Six years of teaching children to code' },

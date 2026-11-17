@@ -1,17 +1,73 @@
 ---
-import { site } from '../data/site';
-const note = ["The teacher's full attention, at your child's pace.", 'Bring a sibling or a friend.', 'The lowest price per class.'];
+import { currencies, defaultCurrency, packages, groupDiscounts, timezoneCurrency } from '../data/prices';
+const cur = currencies[defaultCurrency];
+const base = (c) => c.prices[8] / 8;
+const perClass = (c, n) => Math.round(c.prices[n] / n);
+const saving = (c, n) => Math.round((1 - c.prices[n] / n / base(c)) * 100);
+const fmt = (v) => v.toLocaleString('en-US', { maximumFractionDigits: 1 });
+const data = Object.fromEntries(Object.entries(currencies).map(([k, c]) => [k, {
+  label: c.label,
+  rows: Object.fromEntries(packages.map((p) => [p.classes, { price: fmt(c.prices[p.classes]), per: fmt(perClass(c, p.classes)), save: saving(c, p.classes) }])),
+}]));
 ---
-<div class="row">
-  {site.pricing.modulePerChild.map((p, i) => (
-    <div class="card">
-      <strong>{p.label} {p.discount > 0 && <span class="tag tag-yellow">{p.discount}% off</span>}</strong>
-      <div class="num price">{site.currency} {p.price}</div>
-      <div class="small">{p.children === 1 ? `per module of ${site.classesPerModule} classes` : 'per child, per module'}</div>
-      <p style="margin-top: 14px">{note[i]}</p>
-    </div>
-  ))}
+<div class="prices pending" data-prices={JSON.stringify({ data, tz: timezoneCurrency })}>
+  <div class="cards">
+    {packages.map((p) => {
+      const s = saving(cur, p.classes);
+      return (
+        <div class={`card pkg${p.popular ? ' popular' : ''}`} data-pkg={p.classes}>
+          {p.popular && <span class="badge">Most popular</span>}
+          <h3>{p.title}</h3>
+          <p class="small sub">{p.sub}</p>
+          <div class="num price"><span data-f="label">{cur.label}</span> <span data-f="price">{fmt(cur.prices[p.classes])}</span></div>
+          <p class="small per"><span data-f="label">{cur.label}</span> <span data-f="per">{fmt(perClass(cur, p.classes))}</span> per class{' '}
+            <span class="save" data-f="save" hidden={s <= 0}>Save {s}%</span>
+          </p>
+          <ul class="ticks">{p.points.map((t) => <li>{t}</li>)}</ul>
+        </div>
+      );
+    })}
+  </div>
+  <p class="groups">
+    <strong>Learning with a sibling or friend?</strong> Each child pays {groupDiscounts[0].percent}% less in a group of {groupDiscounts[0].children}, and {groupDiscounts[1].percent}% less in a group of {groupDiscounts[1].children}, on any package.
+  </p>
 </div>
+<script>
+  for (const box of document.querySelectorAll<HTMLElement>('.prices')) {
+    const { data, tz } = JSON.parse(box.dataset.prices!);
+    const show = (code: string) => {
+      const d = data[code]; if (!d) return;
+      box.querySelectorAll<HTMLElement>('[data-f="label"]').forEach((e) => (e.textContent = d.label));
+      box.querySelectorAll<HTMLElement>('[data-pkg]').forEach((card) => {
+        const r = d.rows[card.dataset.pkg!];
+        card.querySelector('[data-f="price"]')!.textContent = r.price;
+        card.querySelector('[data-f="per"]')!.textContent = r.per;
+        const s = card.querySelector<HTMLElement>('[data-f="save"]')!;
+        s.textContent = `Save ${r.save}%`; s.hidden = r.save <= 0;
+      });
+    };
+    // One currency per visitor, from their device time zone; no switching.
+    let pick = 'USD';
+    try { pick = tz[Intl.DateTimeFormat().resolvedOptions().timeZone] || 'USD'; } catch {}
+    show(pick);
+    box.classList.remove('pending');
+  }
+</script>
 <style>
-  .price { font-size: 2.9rem; font-weight: 700; line-height: 1.2; }
+  .prices.pending .price, .prices.pending .per { visibility: hidden; }
+  .prices { padding-top: 28px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; align-items: stretch; }
+  .pkg { position: relative; display: flex; flex-direction: column; gap: 6px; }
+  .pkg h3 { font-size: 1.6rem; }
+  .sub { margin-top: -2px; }
+  .price { font-size: 2.6rem; font-weight: 700; line-height: 1.15; margin-top: 10px; }
+  .per { color: var(--ink); }
+  .save { display: inline-block; margin-left: 6px; background: var(--mint); border: 2px solid var(--ink); border-radius: 8px; padding: 0 8px; font-weight: 700; }
+  .save[hidden] { display: none; }
+  .ticks { margin-top: 14px; }
+  .popular { border-width: 4px; box-shadow: 8px 8px 0 var(--purple); }
+  @media (min-width: 900px) { .popular { transform: translateY(-10px); } }
+  .badge { position: absolute; top: -16px; left: 22px; background: var(--yellow); border: var(--line); border-radius: 10px; padding: 4px 12px; font-weight: 700; font-size: 0.94rem; }
+  .groups { margin-top: 28px; max-width: 46em; }
 </style>
+<noscript><style>.prices.pending .price, .prices.pending .per { visibility: visible; }</style></noscript>

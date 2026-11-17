@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
-const p = site.pricing;
 ---
 <Base
   title="Terms and Conditions | Bright School"
@@ -9,7 +8,7 @@ const p = site.pricing;
 >
   <section class="wrap page-head">
     <h1>Terms and conditions</h1>
-    <p class="small">Last updated: 11 November 2026</p>
+    <p class="small">Last updated: 17 November 2026</p>
   </section>
   <section class="wrap section" style="padding-bottom: var(--section)">
     <div class="prose">
@@ -24,15 +23,15 @@ const p = site.pricing;
       <h2>3. Booking and class times</h2>
       <p>You book class times with us in advance, between 10am and 7pm UAE time on any day. We will do our best to keep your child with the same teacher, but we may change the teacher when needed.</p>
 
-      <h2>4. Fees and payment</h2>
+      <h2>4. Fees</h2>
       <ul>
-        <li>A module of {site.classesPerModule} classes costs {site.currency} {p.modulePerChild[0].price} for 1:1 classes, {site.currency} {p.modulePerChild[1].price} per child in a group of 2, and {site.currency} {p.modulePerChild[2].price} per child in a group of 3.</li>
-        <li>A single class costs {site.currency} {p.singleClass}.</li>
-        <li>If we change our prices, the new price applies only to modules you have not yet paid for.</li>
+        <li>Classes are sold in packages of 8, 16 or 48 classes. Current prices are shown on our <a href="/pricing">pricing page</a> in the currency for your region.</li>
+        <li>The price confirmed to you when you book a package is the price you pay.</li>
+        <li>If we change our prices, the new price applies only to packages you have not yet paid for.</li>
       </ul>
 
       <h2>5. Group classes</h2>
-      <p>Group prices apply when 2 or 3 children take the same classes together. If a child leaves a group, the price for the remaining classes changes to match the new group size from the next module.</p>
+      <p>Group prices apply when 2 or 3 children take the same classes together. If a child leaves a group, the price for the remaining classes changes to match the new group size.</p>
 
       <h2>6. Rescheduling and missed classes</h2>
       <ul>

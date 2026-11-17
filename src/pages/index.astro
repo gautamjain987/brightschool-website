@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { site } from '../data/site';
+import PriceCards from '../components/PriceCards.astro';
 import { existsSync } from 'node:fs';
 
 // Short clips of past students, carried over from the previous site.
@@ -129,18 +130,8 @@ print("I made this!")</code></pre>
 
   <section id="pricing" class="wrap section">
     <h2>Simple pricing</h2>
-    <p class="lead">A module is {site.classesPerModule} classes of {site.classLengthMinutes} minutes. Learning with a sibling or friend lowers the price for each child.</p>
-    <div class="row">
-      {site.pricing.modulePerChild.map((p, i) => (
-        <div class="card">
-          <strong>{p.label} {p.discount > 0 && <span class="tag tag-yellow">{p.discount}% off</span>}</strong>
-          <div class="num price">{site.currency} {p.price}</div>
-          <div class="small">{p.children === 1 ? `per module of ${site.classesPerModule} classes` : 'per child, per module'}</div>
-          <p style="margin-top: 14px">{priceNote[i]}</p>
-        </div>
-      ))}
-    </div>
-    <p class="small" style="margin-top: 20px">Prefer to pay as you go? A single class is {site.currency} {site.pricing.singleClass}. The trial class is free.</p>
+    <p class="lead">Every class is {site.classLengthMinutes} minutes, live with a teacher. The more classes you book, the less each one costs.</p>
+    <PriceCards />
     <p style="margin-top: 24px"><a href="/book-now" class="btn btn-primary">Book a free trial class</a></p>
   </section>
 

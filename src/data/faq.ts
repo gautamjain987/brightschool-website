@@ -11,7 +11,7 @@ export const faq = [
   { q: 'How big are the classes?', a: 'Classes are 1:1 or small groups of up to 3 children with one teacher.' },
   { q: 'When do the classes happen?', a: 'Every day of the week, between 10am and 7pm UAE time. You choose the slots that suit your family.' },
   { q: 'How often are the classes?', a: 'We recommend 2 classes a week so your child has time to absorb and practise what they learn. You can choose to do fewer or more.' },
-  { q: 'How much does it cost?', a: 'A module of 8 classes is AED 800 for 1:1 classes. In a group of 2 it is AED 600 per child, and in a group of 3 it is AED 480 per child. A single class is AED 120.' },
+  { q: 'How much does it cost?', a: 'Classes come in packages of 8, 16 or 48, and the bigger the package, the less each class costs. Most families choose 16 classes, which takes a child to their first certificate. Prices are shown in your local currency on the pricing page. Children learning together in a group of 2 or 3 each pay 25% or 40% less.' },
   { q: 'What happens if we cannot attend a class?', a: 'You book classes in the teacher\'s calendar yourself. If you are away, simply do not book a class for that period. There is no penalty for taking a break.' },
   { q: 'Can I reschedule a class?', a: 'Yes, you can reschedule up to 24 hours before the class.' },
   { q: 'My child is very young. Will they be able to follow?', a: 'Our courses are designed for children from age 6. Classes are paced to your child\'s speed, and the Beginner course uses blocks instead of typing.' },

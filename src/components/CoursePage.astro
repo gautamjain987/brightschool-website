@@ -12,7 +12,6 @@ const isModule = d.kind === 'ai-module';
 const length = d.syllabus.length
   ? `${d.syllabus.length} modules of ${site.classesPerModule} classes`
   : isModule ? `${site.classesPerModule} classes` : `Modules of ${site.classesPerModule} classes`;
-const from = site.pricing.modulePerChild.at(-1).price;
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'Course',
   name: `${d.title} (ages ${d.ages})`, description: d.seoDescription,
@@ -39,7 +38,7 @@ const jsonLd = {
       <div><dt>Class</dt><dd>{site.classLengthMinutes} minutes, live online</dd></div>
       <div><dt>Group size</dt><dd>1:1 or up to 3 children</dd></div>
       <div><dt>Length</dt><dd>{length}</dd></div>
-      <div><dt>Price</dt><dd>From {site.currency} {from} per module. <a href="/pricing">See pricing</a></dd></div>
+      <div><dt>Packages</dt><dd>8, 16 or 48 classes. <a href="/pricing">See pricing</a></dd></div>
     </dl>
   </section>
 

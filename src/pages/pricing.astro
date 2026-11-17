@@ -6,16 +6,15 @@ import { site } from '../data/site';
 ---
 <Base
   title="Pricing | Coding and AI Classes for Kids | Bright School"
-  description="Bright School prices: AED 800 per module of 8 one-to-one classes, AED 600 per child in a group of 2, AED 480 per child in a group of 3. Single class AED 120. Free trial class."
+  description="Bright School prices for live coding and AI classes: packages of 8, 16 or 48 classes, with bigger savings on bigger packages and group discounts for siblings and friends. Free trial class."
 >
   <section class="wrap page-head">
     <h1>Pricing</h1>
-    <p class="lead">One price list for every course and AI module. A module is {site.classesPerModule} classes of {site.classLengthMinutes} minutes with a teacher.</p>
+    <p class="lead">One price list for every course and AI module. Every class is {site.classLengthMinutes} minutes, live with a teacher, and the bigger the package, the less each class costs.</p>
   </section>
 
   <section class="wrap section">
     <PriceCards />
-    <p style="margin-top: 24px">Prefer to pay as you go? A single class is <strong>{site.currency} {site.pricing.singleClass}</strong>. The trial class is free.</p>
     <p style="margin-top: 24px"><a href="/book-now" class="btn btn-primary">Book a free trial class</a></p>
   </section>
 
@@ -33,7 +32,7 @@ import { site } from '../data/site';
       </div>
       <div>
         <h2>How groups work</h2>
-        <p style="margin-top: 20px">Group prices are per child. Bring a sibling or friends and each child pays the group price: 25% less in a group of 2, and 40% less in a group of 3.</p>
+        <p style="margin-top: 20px">Group prices are per child, on any package. Bring a sibling or friends and each child pays 25% less in a group of 2, and 40% less in a group of 3.</p>
         <h2 style="margin-top: 40px">Cancelling</h2>
         <p style="margin-top: 20px">You can cancel at any time. You pay only for the classes already taken and we refund the rest. There are no cancellation charges.</p>
       </div>
